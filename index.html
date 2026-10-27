@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CollageCraft — Make photo collages in your browser</title>
+<meta name="description" content="CollageCraft builds photo collages entirely in your browser: up to 16 photos, grid layouts, gaps, borders, rounded corners, and HD PNG export. Your photos are never uploaded.">
+<link rel="canonical" href="https://collagecraft-app.vercel.app/">
+<meta name="theme-color" content="#0B0B0F">
+<meta property="og:title" content="CollageCraft — Make photo collages in your browser">
+<meta property="og:description" content="Up to 16 photos, grid layouts, gaps, borders and HD PNG export. Your photos are processed locally and never uploaded.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://collagecraft-app.vercel.app/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CollageCraft — Make photo collages in your browser">
+<meta name="twitter:description" content="Up to 16 photos, grid layouts, gaps, borders and HD PNG export. Your photos are processed locally and never uploaded.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Collage<span>Craft</span></div>
+  <p class="tagline">Photo collages, made locally in your browser.</p>
+</header>
+
+<main class="layout">
+  <section class="controls" aria-label="Collage controls">
+    <h2>Photos</h2>
+    <div id="dropZone" class="dropzone" tabindex="0" role="button" aria-label="Add photos">
+      <p>Drop photos here, paste them, or choose files.</p>
+      <p class="hint">Up to 16 photos. JPG, PNG, WebP and other browser-readable images.</p>
+    </div>
+    <input type="file" id="photoInput" accept="image/*" multiple hidden>
+    <div class="row">
+      <button type="button" id="addBtn">Add photos</button>
+      <button type="button" id="sampleBtn">Load sample photos</button>
+      <button type="button" id="clearBtn">Clear all</button>
+    </div>
+    <p id="statusText" class="status" role="status">Add photos to start your collage.</p>
+    <p id="emptyNote" class="empty-note">No photos yet. Load the sample photos to try every layout without uploading anything.</p>
+
+    <h2>Layout</h2>
+    <p class="hint">Classic adapts to your photo count. A fixed layout is disabled when it needs more cells than you have photos.</p>
+    <div id="layoutPicker" class="picker" aria-label="Grid layout"></div>
+
+    <h2>Style</h2>
+    <label class="field">Gap <span id="gapValue">12 px</span>
+      <input type="range" id="gapRange" min="0" max="40" value="12">
+    </label>
+    <label class="field">Border width <span id="borderValue">4 px</span>
+      <input type="range" id="borderRange" min="0" max="20" value="4">
+    </label>
+    <label class="field">Border colour
+      <input type="color" id="borderColor" value="#ffffff">
+    </label>
+    <label class="field">Corner radius <span id="radiusValue">16 px</span>
+      <input type="range" id="radiusRange" min="0" max="60" value="16">
+    </label>
+    <label class="field">Background colour
+      <input type="color" id="bgColor" value="#121218">
+    </label>
+    <div id="bgPresets" class="presets" aria-label="Background presets">
+      <button type="button" data-bg="#121218">Dark</button>
+      <button type="button" data-bg="#ffffff">White</button>
+      <button type="button" data-bg="#0B0B0F">Black</button>
+      <button type="button" data-bg="#E5484D">Red</button>
+      <button type="button" data-bg="#1D6FB8">Blue</button>
+      <button type="button" data-bg="#2E7D4F">Green</button>
+    </div>
+
+    <h2>Canvas size</h2>
+    <label class="field">Preset
+      <select id="sizePreset"></select>
+    </label>
+    <div id="customSizeRow" class="row" hidden>
+      <label class="field">Width (px)
+        <input type="number" id="customWidth" min="200" max="4000" value="1080">
+      </label>
+      <label class="field">Height (px)
+        <input type="number" id="customHeight" min="200" max="4000" value="1080">
+      </label>
+    </div>
+
+    <h2>Your photos</h2>
+    <p class="hint">Click a photo name to select it in the preview. Use Move up / Move down, Swap with, Rotate, or the fit menu per photo. You can also drag a photo on the preview to move it.</p>
+    <div id="photoList" class="photo-list"></div>
+  </section>
+
+  <section class="preview-panel" aria-label="Collage preview">
+    <div class="stats">
+      <span id="photoCountText">0/16 photos</span>
+      <span id="gridSizeText">1 x 1 grid</span>
+      <span id="exportSizeText">1080 x 1080 PNG</span>
+    </div>
+    <canvas id="previewCanvas" width="960" height="960" aria-label="Collage preview"></canvas>
+    <button type="button" id="exportBtn" class="export" disabled>Download PNG</button>
+    <p class="hint">Export renders the same collage at full canvas size and downloads it as collagecraft-collage.png.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Built by krrish · <a href="https://github.com/codewithkrrish/collagecraft">GitHub</a> · <a href="https://www.instagram.com/krrishx.ai">Instagram</a></p>
+  <p>Your photos are processed locally in your browser and never uploaded.</p>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
